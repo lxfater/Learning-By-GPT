@@ -40,6 +40,8 @@
 <style scoped lang="scss">
 .help-container {
     padding: 10px;
+    height: 460px;
+    overflow: auto;
     .list {
         .item {
             .question {
