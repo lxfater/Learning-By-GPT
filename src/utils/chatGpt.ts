@@ -50,13 +50,13 @@ export async function getAccessToken() {
   return resp.accessToken;
 }
 
-export async function getAnswer(question: string) {
-  console.log(question)
+export async function getAnswer(question: string, signal?: AbortSignal) {
   const accessToken = await getAccessToken();
   let text = '';
   return new Promise((resolve, reject) => {
     fetchSSE("https://chat.openai.com/backend-api/conversation", {
       method: "POST",
+      signal,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
@@ -73,7 +73,7 @@ export async function getAnswer(question: string) {
             },
           },
         ],
-        model: "text-davinci-002-render",
+        model: "text-davinci-002-render-sha",
         parent_message_id: uuidv4(),
       }),
       onMessage(message: string) {

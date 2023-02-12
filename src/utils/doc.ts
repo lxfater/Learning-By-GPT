@@ -2,7 +2,7 @@ import { Document, Header, Packer, Paragraph, Tab, TextRun } from "docx";
 import { saveAs } from 'file-saver';
 
 
-export const createStory = (story: string, close: string, translation: string, words:string[], question:string[]) => {
+export const createStory = (title:string, story: string, close: string, translation: string, words:string[], question:string[]) => {
     const children = [];
     children.push();
     function createParagraph(text: string, title: string) {
@@ -59,13 +59,13 @@ export const createStory = (story: string, close: string, translation: string, w
     if(close) {
         children.push(...createParagraph(close, 'Close'));
     }
-    if(question) {
+    if(question.length > 0) {
         children.push(...createParagraphs(question,'Question'));
     }
     if(translation) {
         children.push(...createParagraph(translation,'Translation'));
     }
-    if(words) {
+    if(words.length > 0) {
         children.push(...createParagraphs(words,'Words'));
     }
     const doc = new Document({
@@ -77,6 +77,6 @@ export const createStory = (story: string, close: string, translation: string, w
     });
     
     return Packer.toBlob(doc).then((blob) => {
-        saveAs(blob, "example.docx");
+        saveAs(blob, `${title}.docx`);
     })
 }

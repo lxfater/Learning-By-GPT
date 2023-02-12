@@ -7,6 +7,11 @@ const routes = [
         exact: true
     },
     {
+        path: '/help',
+        component: () => import('./views/Help.vue'),
+        exact: true
+    },
+    {
         path: '/tasks',
         component: () => import('./views/Tasks.vue'),
         exact: true

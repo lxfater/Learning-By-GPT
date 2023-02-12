@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
+    "fast-build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -14,6 +15,8 @@
     "eventsource-parser": "^0.1.0",
     "expiry-map": "^2.0.0",
     "file-saver": "^2.0.5",
+    "p-queue": "^7.3.4",
+    "p-retry": "^5.1.2",
     "uuid": "^9.0.0",
     "vant": "^4.0.10",
     "vue": "^3.2.45",
