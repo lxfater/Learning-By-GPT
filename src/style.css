@@ -1,0 +1,10 @@
+
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+#app {
+  max-width: 500px;
+}
