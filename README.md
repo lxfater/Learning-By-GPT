@@ -1,7 +1,11 @@
 # Learning-By-GPT
 A chrome extension helps you learn using ai technology.
-## 截图
 
+使用人工智能加速你的英语学习。
+## 截图
+![材料生成](https://raw.githubusercontent.com/lxfater/Learning-By-GPT/main/screenshots/gen.png)
+![任务管理](https://raw.githubusercontent.com/lxfater/Learning-By-GPT/main/screenshots/tasks.png)
+![生成结果](https://raw.githubusercontent.com/lxfater/Learning-By-GPT/main/screenshots/doc.png)
 ## 特性
 1. 文章生成：支持按照关键字生成特定文体，领域的文章。
 2. 辅助材料生成：支持生成完形填空，翻译，阅读理解，单词解析。
