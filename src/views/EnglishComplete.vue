@@ -104,7 +104,7 @@ const generateKeyWords = async () => {
         showNotify({ message: '没有API权限,查看帮助', duration: 3000 });
     }
 
-    const keywordsPrompt = `Generate 10 keywords  about ${domain.value} randomly separated by commas.`
+    const keywordsPrompt = `Generate 10 English keywords  about ${domain.value} randomly separated by commas.`
     let newKeywords = await getAnswer(keywordsPrompt) as string
     showNotify({ type: 'success', message: '关键词生成成功' });
     keywords.value += newKeywords
@@ -202,7 +202,7 @@ const addJobs = () => {
                         </van-col>
                     </van-row>
                     <van-row>
-                        <van-field v-model="title" label="文本" placeholder="请输入文件名,默认为领域-文体-key" />
+                        <van-field v-model="title" label="文件名称" placeholder="请输入文件名,默认为领域-文体-key" />
                     </van-row>
                 </van-cell-group>
                 <van-row justify="center">

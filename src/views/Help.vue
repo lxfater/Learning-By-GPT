@@ -18,7 +18,7 @@
         </div>
         <div class="item">
             <div class="question">为什么提示没有没有API权限？</div>
-            <div class="answer">这是一款基于ChatGPT开发的扩展，这意味着你登录ChatGPT来使用这些功能。<a href="https://chat.openai.com/chat" target="_blank">点击这里</a>。登录你的账号。</div>
+            <div class="answer">这是一款基于ChatGPT开发的扩展，这意味着你登录ChatGPT来使用这些功能。有时候你的VPN也会导致一下问题，请关闭你的VPN并刷新ChatGPT页面。<a href="https://chat.openai.com/chat" target="_blank">点击这里</a>。登录你的账号。</div>
         </div>
         <div class="item">
             <div class="question">没有ChatGPT账号怎么办？</div>
