@@ -1,9 +1,12 @@
 import type { Job, JobArr, JobDetail } from './types'
 import Browser from 'webextension-polyfill'
 import PQueue from 'p-queue';
-import { getAnswer } from './utils/chatGpt';
 import pRetry from 'p-retry';
 import { JobMeta } from './types'
+import { ChatGptWebProvider } from '@lxfater/ai-bridge';
+
+let instance = new ChatGptWebProvider();
+
 class JobQueue {
     jobMap = new Map<string, JobMeta>()
     controllers = new Map<string, AbortController>()
@@ -42,7 +45,10 @@ class JobQueue {
        
         this.changeJobState(key, 'running')
         this.changeJobStage(key, 'story')
-        let story = await this.createCancelRetryJob(() => getAnswer(job.detail.story, controller.signal), key)
+        let story = await this.createCancelRetryJob(() => instance.ask(job.detail.story, {
+            signal: controller.signal,
+            deleteConversation: true
+        }), key)
         if(controller.signal.aborted) {
             this.changeJobState(key, 'canceled')
             return 0;
@@ -53,7 +59,10 @@ class JobQueue {
             if(job.detail[k] && job.detail[k].length > 0) {
                 let actualDetail = job.detail[k].replaceAll('${story}', story as unknown as string)
                 this.changeJobStage(key, k)
-                const content = await this.createCancelRetryJob(() => getAnswer(actualDetail, controller.signal), key)
+                const content = await this.createCancelRetryJob(() => instance.ask(actualDetail, {
+                    signal: controller.signal,
+                    deleteConversation: true
+                }), key)
                 if(controller.signal.aborted) {
                     this.changeJobState(key, 'canceled')
                     break;
@@ -122,7 +131,10 @@ class JobQueue {
             const hasStory = result.story
             if(!hasStory) {
                 this.changeJobStage(key, 'story')
-                story = await this.createCancelRetryJob(() => getAnswer(this.jobMap.get(key)!.job.detail.story, controller.signal), key) as string;
+                story = await this.createCancelRetryJob(() => instance.ask(this.jobMap.get(key)!.job.detail.story, {
+                    signal: controller.signal,
+                    deleteConversation: true
+                }), key) as string;
                 if(controller.signal.aborted) {
                     this.changeJobState(key, 'canceled')
                     return 0;
@@ -137,7 +149,10 @@ class JobQueue {
                 if( hasPrompt  && !hasContent) {
                     let actualDetail = job.detail[k].replaceAll('${story}', story as unknown as string)
                     this.changeJobStage(key, k)
-                    const content = await this.createCancelRetryJob(() => getAnswer(actualDetail, controller.signal), key)
+                    const content = await this.createCancelRetryJob(() => instance.ask(actualDetail, {
+                        signal: controller.signal,
+                        deleteConversation: true
+                    }), key)
                     if(controller.signal.aborted) {
                         this.changeJobState(key, 'canceled')
                         break;
